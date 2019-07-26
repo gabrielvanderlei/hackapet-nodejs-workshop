@@ -18,8 +18,18 @@ let currentId = 1
 
 app.use(bodyParser.json())
 
-app.get('/dvds', function(request, response){
-    response.send(dvds)
+app.get('/dvds', function(req, res){
+    let year = req.query.year
+    console.log(year)
+    if(year){
+        res.send(
+            dvds.filter(function(dvd){
+                return dvd.year == year
+            })
+        )
+    } else {
+        res.send(dvds)
+    }
 })
 
 app.post('/dvds', function(req, res){
@@ -145,5 +155,5 @@ app.put('/dvds/:dvdId/return', function(req, res){
 })
 
 app.listen(3000, function(){
-    console.log('Hello World')
+    console.log('Helldo World')
 })

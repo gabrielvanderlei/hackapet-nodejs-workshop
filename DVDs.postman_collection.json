@@ -21,11 +21,76 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\ttitle: 'a',\n\tyear: 2000\n}"
+					"raw": "{\n\t\"title\": \"a\",\n\t\"year\": 2000\n}"
 				},
 				"description": ""
 			},
-			"response": []
+			"response": [
+				{
+					"id": "9a711965-8f9f-4911-8968-12530d8a7638",
+					"name": "DVDS - Criar",
+					"originalRequest": {
+						"url": "localhost:3000/dvds",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"a\",\n\t\"year\": 2000\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "connection",
+							"key": "connection",
+							"value": "keep-alive",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "361",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Fri, 26 Jul 2019 18:47:13 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "etag",
+							"key": "etag",
+							"value": "W/\"169-Q0cl1Y9rfNoa6xqLPt8tc4F0seY\"",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"name": "x-powered-by",
+							"key": "x-powered-by",
+							"value": "Express",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"responseTime": 29,
+					"body": "[{\"title\":\"Senhor dos aneis\",\"year\":2000,\"id\":0,\"rent\":{\"rented\":false,\"renter\":\"\"}},{\"title\":\"a\",\"year\":2000,\"id\":1,\"rent\":{\"rented\":false,\"renter\":\"\"}},{\"title\":\"a\",\"year\":2000,\"id\":2,\"rent\":{\"rented\":false,\"renter\":\"\"}},{\"title\":\"a\",\"year\":2000,\"id\":3,\"rent\":{\"rented\":false,\"renter\":\"\"}},{\"title\":\"a\",\"year\":2000,\"id\":4,\"rent\":{\"rented\":false,\"renter\":\"\"}}]"
+				}
+			]
 		},
 		{
 			"name": "DVDS - Ver todos",
@@ -41,7 +106,7 @@
 		{
 			"name": "DVDS - Ver específico",
 			"request": {
-				"url": "localhost:3000/dvds/1",
+				"url": "localhost:3000/dvds/0",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -52,7 +117,7 @@
 		{
 			"name": "DVDS - Alterar específico",
 			"request": {
-				"url": "localhost:3000/dvds/1",
+				"url": "localhost:3000/dvds/0",
 				"method": "PUT",
 				"header": [
 					{
@@ -63,7 +128,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"Novo\",\n\t\"year\": 1020\n}"
+					"raw": "{\n\t\"title\": \"Nssovo\",\n\t\"year\": 1020\n}"
 				},
 				"description": ""
 			},
@@ -74,6 +139,37 @@
 			"request": {
 				"url": "localhost:3000/dvds/1",
 				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DVDS - Alugar específico",
+			"request": {
+				"url": "localhost:3000/dvds/1/rent",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"renter\": \"Gabriel\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DVDS - Retornar específico",
+			"request": {
+				"url": "localhost:3000/dvds/1/return",
+				"method": "PUT",
 				"header": [],
 				"body": {},
 				"description": ""

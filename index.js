@@ -1,6 +1,7 @@
 let express = require('express')
 let bodyParser = require('body-parser')
 let app = express()
+let mongose = require('mongose')
 
 let dvds = [
     {
@@ -20,16 +21,31 @@ app.use(bodyParser.json())
 
 app.get('/dvds', function(req, res){
     let year = req.query.year
-    console.log(year)
+    let rented = req.query.rented
+    let querys = 0
+    let result = []
+
     if(year){
-        res.send(
-            dvds.filter(function(dvd){
-                return dvd.year == year
-            })
-        )
-    } else {
-        res.send(dvds)
+        result += dvds.filter(function(dvd){
+            return dvd.year == year
+        })
+
+        querys++
     }
+    
+    if(rented){
+        result += dvds.filter(function(dvd){
+            return dvd.rented == rented
+        })
+
+        querys++
+    }
+
+    if(!querys) {
+        results += dvds
+    }
+
+    res.send(result)
 })
 
 app.post('/dvds', function(req, res){
@@ -116,7 +132,7 @@ app.put('/dvds/:dvdId/rent', function(req, res){
     })
 
     if(foundDvd){
-        if(data.renter){
+        if(data.c){
             if(!foundDvd.rent.rented){
                 foundDvd.rent.rented = true 
                 foundDvd.rent.renter = data.renter 

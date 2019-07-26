@@ -5,11 +5,16 @@ let app = express()
 let dvds = [
     {
         title: 'Senhor dos aneis',
-        year: 2000
+        year: 2000,
+        id: 0,
+        rent: {
+            rented: false,
+            renter: ""
+        }
     }
 ]
 
-let currentId = 0
+let currentId = 1
 
 app.use(bodyParser.json())
 
@@ -24,7 +29,11 @@ app.post('/dvds', function(req, res){
         dvds.push({
             title: data.title,
             year: data.year,
-            id: currentId
+            id: currentId,
+            rent: {
+                rented: false,
+                renter: ""
+            }
         })
 
         currentId++
@@ -46,14 +55,9 @@ app.put('/dvds/:dvdId', function(req, res){
 
     if(foundDvd){
         if(data.title && data.year){
-
-            dvds[dvdIndex] = {
-                title: data.title,
-                year: data.year,
-                id: foundDvd.id
-            }
-    
-            res.send(dvds)
+            foundDvd.title = data.title,
+            foundDvd.year = data.year
+            res.send(foundDvd)
         } else {
             res.status(400).send({message: 'Bad Request'})
         }
@@ -65,16 +69,14 @@ app.put('/dvds/:dvdId', function(req, res){
 app.delete('/dvds/:dvdId', function(req, res){
     let data = req.body
     let id = req.params.dvdId
-    let dvdIndex = 0
 
-    let foundDvd = dvds.find(function(dvd, index){
-        dvdIndex = index
+    let foundDvd = dvds.findIndex(function(dvd){
         return dvd.id == id
     })
 
-    if(foundDvd){
-        dvds.splice(dvdIndex, 1)
-        res.send(dvds)
+    if(foundDvd !== -1){
+        dvds.splice(foundDvd, 1)
+        res.status(200).send({message: 'Excluído com sucesso.'})
     } else {
         res.status(404).send({message: 'Dvd não encontrado'})
     }
@@ -89,6 +91,54 @@ app.get('/dvds/:dvdId', function(req, res){
 
     if(foundDvd){
         res.send(foundDvd)
+    } else {
+        res.status(404).send({message: 'Dvd não encontrado'})
+    }
+})
+
+//put /dvds/:dvdId/rent
+app.put('/dvds/:dvdId/rent', function(req, res){
+    let data = req.body
+    let id = req.params.dvdId
+
+    let foundDvd = dvds.find(function(dvd){
+        return dvd.id == id
+    })
+
+    if(foundDvd){
+        if(data.renter){
+            if(!foundDvd.rent.rented){
+                foundDvd.rent.rented = true 
+                foundDvd.rent.renter = data.renter 
+                res.send(foundDvd)
+            } else {
+                res.status(400).send({message: 'O DVD já está alugado'})
+            }
+        } else {
+            res.status(400).send({message: 'Bad Request'})
+        }
+    } else {
+        res.status(404).send({message: 'DVD não encontrado'})
+    }
+})
+
+//put /dvds/:dvdId/return
+app.put('/dvds/:dvdId/return', function(req, res){
+    let data = req.body
+    let id = req.params.dvdId
+
+    let foundDvd = dvds.find(function(dvd){
+        return dvd.id == id
+    })
+
+    if(foundDvd){
+        if(foundDvd.rent.rented){
+            foundDvd.rent.rented = false 
+            foundDvd.rent.renter = "" 
+            res.send(foundDvd)
+        } else {
+            res.status(400).send({message: 'DVD já devolvido'})
+        }
     } else {
         res.status(404).send({message: 'Dvd não encontrado'})
     }

@@ -41,7 +41,7 @@ app.get('/dvds', function(req, res){
     }
 
     if(!querys) {
-        results += dvds
+        result += dvds
     }
 
     res.send(result)

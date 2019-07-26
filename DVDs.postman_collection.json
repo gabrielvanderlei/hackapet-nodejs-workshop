@@ -1,0 +1,84 @@
+{
+	"variables": [],
+	"info": {
+		"name": "DVDs",
+		"_postman_id": "2d5d5e65-aae8-a038-e7a5-8c07b709f512",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DVDS - Criar",
+			"request": {
+				"url": "localhost:3000/dvds",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\ttitle: 'a',\n\tyear: 2000\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DVDS - Ver todos",
+			"request": {
+				"url": "localhost:3000/dvds",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DVDS - Ver específico",
+			"request": {
+				"url": "localhost:3000/dvds/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DVDS - Alterar específico",
+			"request": {
+				"url": "localhost:3000/dvds/1",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Novo\",\n\t\"year\": 1020\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DVDs - Deletar específico",
+			"request": {
+				"url": "localhost:3000/dvds/1",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
